@@ -1,0 +1,6 @@
+{
+    "mongoURI":"mongodb+srv://Han:han@cluster0.q9jmp.mongodb.net/blog-post-db?retryWrites=true&w=majority",
+    "jwtSecret":"han",
+    "githubClientId":"95924e296f15e5d340ae",
+    "githubSecret":"f9f1c1bb0d3af33d3c70358978295adefb4fbe59"
+}
