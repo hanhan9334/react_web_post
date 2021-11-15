@@ -14,11 +14,11 @@ const User = require("../../models/User")
 //@access  Public
 router.get("/", auth, async (req, res) => {
 	try {
-		const user = await User.findById(req.user.id)
+		const user = await User.findById(req.user.id).select("-password")
 		res.json(user)
 	} catch (err) {
 		console.log(err.message)
-		res.status(500).json({ msg: "Server" })
+		res.status(500).json({ msg: "User not authenticated" })
 	}
 })
 
@@ -63,7 +63,8 @@ router.post(
 				token = await jwt.sign(payload, config.get("jwtSecret"), {
 					expiresIn: 36000000
 				})
-				return res.json({ token })
+				const respondUser = {_id:user._id,email:user.email,name:user.name}
+				return res.json({user: respondUser, token })
 			} catch (err) {
 				return res.status(500).json({ msg: "Token not generated" })
 			}

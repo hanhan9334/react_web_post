@@ -66,7 +66,13 @@ router.post(
 				token = await jwt.sign(payload, config.get("jwtSecret"), {
 					expiresIn: 360000
 				})
-				return res.json({ token })
+				const respondUser = {
+					_id: user._id,
+					email: user.email,
+					name: user.name
+				}
+
+				return res.json({ user: respondUser, token })
 			} catch (err) {
 				return res.status(500).json({ msg: "Token not generated" })
 			}
